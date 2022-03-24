@@ -1,0 +1,52 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: lightblue;
+  align-items: center;
+  padding: 1rem 4rem;
+
+  & .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & ion-icon {
+      font-size: 6rem;
+    }
+  }
+
+  & .search {
+    display: flex;
+    flex-direction: row;
+
+    &__button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-family: inherit;
+    }
+  }
+
+  & .control {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+
+    & ion-icon {
+      font-size: 2rem;
+    }
+
+    & .recipe {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    & .bookmark {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}
