@@ -45,7 +45,15 @@
     border-radius: 2rem;
     border: 0px solid transparent;
     margin-right: -5rem;
-    text-align: start;
+    text-align: center;
+
+    &::placeholder {
+      color: rgba(lightgray, 0.8);
+    }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &__button {
