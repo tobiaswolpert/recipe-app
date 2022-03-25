@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: row;
+
+  &__results {
+    width: 20rem;
+    height: 60rem;
+    background-color: aqua;
+  }
+
+  &__detail {
+    flex-grow: 1;
+    background-color: bisque;
+  }
+}

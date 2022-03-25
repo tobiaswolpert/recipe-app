@@ -41,6 +41,10 @@ body {
   font-size: 1rem;
   line-height: 1.7;
   color: $color-grey-dark;
-  padding: 3rem;
+  background: linear-gradient(
+    135deg,
+    rgba($color-secondary-light, 0.6),
+    rgba($color-secondary-dark, 0.6)
+  );
   box-sizing: border-box;
 }

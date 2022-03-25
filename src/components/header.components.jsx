@@ -4,7 +4,9 @@ const Header = () => {
   return (
     <header className="header">
       <div className="logo">
-        <ion-icon name="fast-food-outline"></ion-icon>
+        <div className="logo__container">
+          <ion-icon name="fast-food-outline"></ion-icon>
+        </div>
         <div className="logo__text">Food App</div>
       </div>
 
