@@ -3,7 +3,7 @@
   flex-direction: row;
 
   &__results {
-    width: 30rem;
+    flex: 0 0 20%;
     height: 120rem;
     background-color: aqua;
   }
@@ -50,8 +50,8 @@
       display: flex;
       justify-content: space-around;
       font-size: 1.6rem;
-      height: 15rem;
-      padding-top: 10rem;
+      padding: 8rem 0rem;
+      // margin-bottom: 10rem;
     }
 
     &--pair {
@@ -76,17 +76,80 @@
     }
 
     &--ingredients {
+      background-color: $color-grey-light;
       & h1 {
         text-align: center;
+        padding: 3rem 0;
+        color: $color-secondary-dark;
       }
     }
 
     &--list {
+      list-style: none;
+      font-size: 1.6rem;
       display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      // gap: 5rem;
+      justify-content: space-between;
+      padding: 1rem 2rem 1rem 2rem;
+
+      & li {
+        flex: 0 0 50%;
+
+        &::before {
+          content: "";
+          background-image: url(../img/checkmark-outline.svg);
+          display: inline-block;
+          background-size: cover;
+          height: 1.5rem;
+          width: 1.5rem;
+          margin-right: 0.7rem;
+        }
+      }
     }
 
-    &--ingredient {
+    & .cooking {
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 3rem;
+      justify-content: flex-start;
+      flex: 1;
+      gap: 3rem;
+
+      & h1 {
+        text-align: center;
+        padding-top: 3rem;
+        color: $color-secondary-dark;
+      }
+
+      & p {
+        font-size: 1.6rem;
+        text-align: center;
+
+        &.last {
+          margin-top: auto;
+        }
+      }
+
+      & button {
+        padding: 0 5rem;
+        cursor: pointer;
+
+        height: 4rem;
+        font-family: inherit;
+        font-weight: inherit;
+        border-radius: 2rem;
+        text-transform: uppercase;
+        color: #fff;
+        border: 0px solid transparent;
+        background: linear-gradient(
+          135deg,
+          rgba($color-secondary-light, 1),
+          rgba($color-secondary-dark, 1)
+        );
+      }
     }
   }
 }
