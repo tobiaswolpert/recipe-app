@@ -3,13 +3,90 @@
   flex-direction: row;
 
   &__results {
-    width: 20rem;
-    height: 60rem;
+    width: 30rem;
+    height: 120rem;
     background-color: aqua;
   }
 
   &__detail {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     background-color: bisque;
+    text-transform: uppercase;
+
+    & ion-icon {
+      font-size: 2rem;
+      color: $color-secondary-dark;
+    }
+
+    &--img {
+      height: 40rem;
+
+      background-size: cover;
+      background-position: bottom;
+      position: relative;
+    }
+
+    &--name {
+      position: absolute;
+      font-size: 2rem;
+      width: 20rem;
+      text-align: center;
+      font-weight: 700;
+      left: 50%;
+      bottom: 0%;
+      transform: translate(-50%, 50%) rotateZ(-10deg) skewX(-10deg);
+      z-index: 100;
+      color: white;
+      background: linear-gradient(
+        135deg,
+        rgba($color-secondary-light, 1),
+        rgba($color-secondary-dark, 1)
+      );
+    }
+
+    &--individual {
+      display: flex;
+      justify-content: space-around;
+      font-size: 1.6rem;
+      height: 15rem;
+      padding-top: 10rem;
+    }
+
+    &--pair {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    &--circle {
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
+
+      & ion-icon {
+        font-size: 2rem;
+        color: $color-secondary-dark;
+      }
+    }
+
+    &--ingredients {
+      & h1 {
+        text-align: center;
+      }
+    }
+
+    &--list {
+      display: flex;
+    }
+
+    &--ingredient {
+      display: flex;
+    }
   }
 }
