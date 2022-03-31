@@ -1,0 +1,158 @@
+.spinner {
+  height: 4rem;
+  width: 4rem;
+  margin: 30rem auto;
+  text-align: center;
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.recipe {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &.loading {
+    background-color: $color-grey-light;
+  }
+
+  h1 {
+    text-align: center;
+    padding: 3rem 0;
+    color: $color-secondary-dark;
+    text-transform: uppercase;
+  }
+
+  ion-icon {
+    font-size: 2rem;
+    color: $color-secondary-dark;
+  }
+
+  &__img {
+    height: 40rem;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  &__name {
+    position: absolute;
+    font-size: 2rem;
+    width: 20rem;
+    text-align: center;
+    font-weight: 700;
+    left: 50%;
+    bottom: 0%;
+    transform: translate(-50%, 50%) rotateZ(-10deg) skewX(-10deg);
+    z-index: 100;
+    color: white;
+    background: linear-gradient(
+      135deg,
+      rgba($color-secondary-light, 1),
+      rgba($color-secondary-dark, 1)
+    );
+  }
+
+  &__detail {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.6rem;
+    padding: 8rem 0rem;
+    background-color: $color-grey-light-1;
+  }
+
+  &__detail--pair {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  &__circle {
+    background-color: $color-grey-light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+  }
+
+  &__ingredients {
+    background-color: $color-grey-light;
+  }
+
+  &__list {
+    list-style: none;
+    font-size: 1.6rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    padding: 1rem 5rem 1rem 6rem;
+
+    &--item {
+      flex: 0 0 50%;
+      display: flex;
+      margin-bottom: 1rem;
+      // margin-right: 0.1rem;
+      // gap: 0.5rem;
+
+      ion-icon[name="checkmark-outline"] {
+        padding-top: 5px;
+        padding-right: 5px;
+        flex: 0 0 auto;
+      }
+    }
+  }
+
+  & .cooking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    gap: 1rem;
+    padding: 0 16em 3rem 16rem;
+    background-color: $color-grey-light-1;
+
+    h1 {
+      padding-bottom: 0rem;
+    }
+
+    & p {
+      font-size: 1.6rem;
+      text-align: center;
+
+      &.last {
+        margin-top: auto;
+      }
+    }
+
+    & button {
+      padding: 0 5rem;
+      cursor: pointer;
+
+      height: 4rem;
+      font-family: inherit;
+      font-weight: inherit;
+      border-radius: 2rem;
+      text-transform: uppercase;
+      color: #fff;
+      border: 0px solid transparent;
+      background: linear-gradient(
+        135deg,
+        rgba($color-secondary-light, 1),
+        rgba($color-secondary-dark, 1)
+      );
+    }
+  }
+}

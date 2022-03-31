@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import Spinner from "../img/refresh-outline.svg";
 
 const Recipe = () => {
   const [recipeData, setRecipeData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const result = await fetch(
         "https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886"
       );
@@ -22,38 +25,47 @@ const Recipe = () => {
         title: recipe.title,
       };
       setRecipeData(recipe);
+      setIsLoading(false);
     };
-    fetchData();
+    setTimeout(() => fetchData(), 1000);
   }, []);
 
   const recipeList = recipeData.ingredients
     ? recipeData.ingredients.map((item) => (
-        <li>
-          {item.quantity} {item.unit} {item.description}
-        </li>
+        <div className="recipe__list--item">
+          <ion-icon name="checkmark-outline"></ion-icon>
+          <li>
+            {item.quantity} {item.unit} {item.description}
+          </li>
+        </div>
       ))
     : null;
 
   console.log(recipeData);
 
-  return (
-    <div className="container__detail">
+  return isLoading ? (
+    <div className="recipe loading">
+      <div className="spinner">
+        <img src={Spinner} alt="Spinner" />
+      </div>
+    </div>
+  ) : (
+    <div className="recipe">
       <div
-        className="container__detail--img"
+        className="recipe__img"
         style={{ backgroundImage: `url(${recipeData.image})` }}
       >
-        <div className="container__detail--name">{recipeData.title}</div>
+        <div className="recipe__name">{recipeData.title}</div>
       </div>
-
-      <div className="container__detail--individual">
-        <div className="container__detail--pair">
+      <div className="recipe__detail">
+        <div className="recipe__detail--pair">
           <ion-icon name="time-outline"></ion-icon>
           <div>
-            <strong>{recipeData.cookingTime}</strong> Minutes
+            <strong>{recipeData.cookingTime}</strong> Minutes{" "}
           </div>
         </div>
 
-        <div className="container__detail--pair">
+        <div className="recipe__detail--pair">
           <ion-icon name="people-outline"></ion-icon>
           <div>
             <strong>{recipeData.servings}</strong> Servings
@@ -62,26 +74,25 @@ const Recipe = () => {
           <ion-icon name="add-circle-outline"></ion-icon>
         </div>
 
-        <div className="container__detail--pair">
-          <div className="container__detail--circle">
+        <div className="recipe__detail--pair">
+          <div className="recipe__circle">
             <ion-icon name="person-outline"></ion-icon>
           </div>
-          <div className="container__detail--circle">
+          <div className="recipe__circle">
             <ion-icon name="bookmark-outline"></ion-icon>
           </div>
         </div>
       </div>
-
-      <div className="container__detail--ingredients">
+      <div className="recipe__ingredients">
         <h1>Recipe Ingredients</h1>
-        <ul className="container__detail--list">{recipeList}</ul>
+        <ul className="recipe__list">{recipeList}</ul>
       </div>
-
       <div className="cooking">
         <h1>How to cook it</h1>
         <p>
           This recipe was carefully designed and tested by{" "}
-          {recipeData.publisher}. Please check out directions at their website
+          <strong> {recipeData.publisher}</strong>. Please check out directions
+          at their website
         </p>
         <button>Directions</button>
 

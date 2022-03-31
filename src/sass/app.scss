@@ -1,6 +1,9 @@
 .App {
   max-width: 120rem;
+  min-height: 120rem;
   margin: 5rem auto;
   border-radius: 5px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
