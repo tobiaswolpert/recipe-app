@@ -41,7 +41,7 @@ const Recipe = () => {
       ))
     : null;
 
-  console.log(recipeData);
+  // console.log(recipeData);
 
   return isLoading ? (
     <div className="recipe loading">

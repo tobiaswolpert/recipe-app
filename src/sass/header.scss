@@ -100,7 +100,7 @@
     color: $color-secondary-dark;
   }
 
-  & .recipe {
+  &__add {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -108,7 +108,7 @@
     text-transform: uppercase;
   }
 
-  & .bookmark {
+  &__bookmark {
     display: flex;
     flex-direction: row;
     align-items: center;

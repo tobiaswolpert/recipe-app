@@ -34,14 +34,14 @@ const Header = () => {
       </form>
 
       <div className="control">
-        <div className="recipe">
+        <div className="control__add">
           <ion-icon name="book-outline"></ion-icon>
-          <div className="recipe__text">Add recipe</div>
+          <div className="control__text">Add recipe</div>
         </div>
 
-        <div className="bookmark">
+        <div className="control__bookmark">
           <ion-icon name="bookmark-outline"></ion-icon>
-          <div className="bookmark__text">Bookmarks</div>
+          <div className="control__text">Bookmarks</div>
         </div>
       </div>
     </header>
