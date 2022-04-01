@@ -31,4 +31,24 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
+  &__pagination {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+
+    &--button {
+      height: 4rem;
+      width: 4rem;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(
+        135deg,
+        rgba($color-secondary-light, 1),
+        rgba($color-secondary-dark, 1)
+      );
+    }
+  }
 }
