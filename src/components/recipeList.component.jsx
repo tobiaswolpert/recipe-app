@@ -1,30 +1,22 @@
 import { useState, useEffect } from "react";
 
-const RecipeList = () => {
-  const [recipes, setRecipes] = useState([]);
+const RecipeList = (props) => {
   const [RecipeList, setRecipeList] = useState([]);
   let [page, setPage] = useState(1);
-  let [total, setTotal] = useState(0);
+  let [total, setTotal] = useState(1);
   let [range, setRange] = useState([0, 10]);
+  let { setItem, recipes } = props;
 
   useEffect(() => {
-    const fetchRecipe = async () => {
-      const res = await fetch(
-        `https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza`
-      );
-      const data = await res.json();
-      const { recipes } = data.data;
-      console.log("recipes", recipes);
-      setRecipes(recipes);
-    };
-    fetchRecipe();
-  }, []);
-
-  useEffect(() => {
+    setItem();
     const RecipeList = recipes.length
-      ? recipes.map((item) => {
+      ? recipes.map((item, idx) => {
           return (
-            <div className="recipeList__item">
+            <div
+              className="recipeList__item"
+              key={idx}
+              onClick={() => setItem(idx)}
+            >
               <img
                 className="recipeList__image"
                 src={item.image_url}
@@ -39,10 +31,12 @@ const RecipeList = () => {
         })
       : [];
     setRecipeList(RecipeList);
-    setTotal(Math.ceil(RecipeList.length / 10));
+    setPage(1);
+    setRange([0, 10]);
+    RecipeList.length
+      ? setTotal(Math.ceil(RecipeList.length / 10))
+      : setTotal(1);
   }, [recipes]);
-
-  console.log("Page Details", page);
 
   const forward = () => {
     if (page < total) {

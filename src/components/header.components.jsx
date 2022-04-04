@@ -1,11 +1,15 @@
 import { useState } from "react";
 
-const Header = () => {
+const Header = (props) => {
   const [search, setSearch] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(search);
+    props.setInput(search);
+  };
+
+  const handleOnChange = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -23,9 +27,7 @@ const Header = () => {
           type="text"
           placeholder="Search over 1.000.000 recipes..."
           value={search}
-          onChange={(e) => {
-            setSearch(() => e.target.value);
-          }}
+          onChange={handleOnChange}
         ></input>
         <button className="search__button">
           <ion-icon name="search-outline"></ion-icon>

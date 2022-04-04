@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import Spinner from "../img/refresh-outline.svg";
 
-const Recipe = () => {
+const Recipe = (props) => {
   const [recipeData, setRecipeData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  let { id } = props;
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       const result = await fetch(
-        "https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886"
+        `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
       );
       const data = await result.json();
       let { recipe } = data.data;
@@ -27,8 +28,8 @@ const Recipe = () => {
       setRecipeData(recipe);
       setIsLoading(false);
     };
-    setTimeout(() => fetchData(), 1000);
-  }, []);
+    fetchData();
+  }, [id]);
 
   const recipeList = recipeData.ingredients
     ? recipeData.ingredients.map((item) => (
@@ -40,8 +41,6 @@ const Recipe = () => {
         </div>
       ))
     : null;
-
-  // console.log(recipeData);
 
   return isLoading ? (
     <div className="recipe loading">
