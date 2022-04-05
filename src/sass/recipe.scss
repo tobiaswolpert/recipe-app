@@ -25,6 +25,13 @@
     background-color: $color-grey-light;
   }
 
+  &.error {
+    align-items: center;
+    padding-top: 2rem;
+    font-size: 1.6rem;
+    background-color: $color-grey-light;
+  }
+
   h1 {
     text-align: center;
     padding: 3rem 0;

@@ -6,27 +6,35 @@ const Result = (props) => {
   const [recipes, setRecipes] = useState([]);
   let [item, setItem] = useState();
   let [id, setId] = useState();
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { input } = props;
 
   useEffect(() => {
     const fetchData = async (param) => {
-      const result = await fetch(
-        `https://forkify-api.herokuapp.com/api/v2/recipes?search=${param}`
-      );
-      const data = await result.json();
-      const { recipes } = data.data;
-
-      setRecipes(recipes);
+      setIsLoading(true);
+      try {
+        const result = await fetch(
+          `https://forkify-api.herokuapp.com/api/v2/recipes?search=${param}`
+        );
+        const data = await result.json();
+        const { recipes } = data.data;
+        setRecipes(recipes);
+      } catch (error) {
+        setHasError(true);
+      }
+      setIsLoading(false);
     };
-    fetchData(props.input);
+    fetchData(input);
     setId();
     setItem();
-  }, [props.input]);
+  }, [input]);
 
   useEffect(() => {
-    if (item !== undefined) {
+    if (recipes !== undefined && item !== undefined) {
       setId(recipes[item].id);
-    } else return;
-  }, [item]);
+    }
+  }, [recipes, item]);
 
   return (
     <div className="container">

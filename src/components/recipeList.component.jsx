@@ -8,7 +8,6 @@ const RecipeList = (props) => {
   let { setItem, recipes } = props;
 
   useEffect(() => {
-    setItem();
     const RecipeList = recipes.length
       ? recipes.map((item, idx) => {
           return (
@@ -36,7 +35,7 @@ const RecipeList = (props) => {
     RecipeList.length
       ? setTotal(Math.ceil(RecipeList.length / 10))
       : setTotal(1);
-  }, [recipes]);
+  }, [recipes, setItem]);
 
   const forward = () => {
     if (page < total) {
@@ -55,17 +54,19 @@ const RecipeList = (props) => {
   return (
     <div className="recipeList">
       {RecipeList.slice(range[0], range[1])}
-      <div className="recipeList__pagination">
-        <button className="recipeList__pagination--button" onClick={backward}>
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </button>
-        <div>
-          {page} / {total}
+      {RecipeList.length ? (
+        <div className="recipeList__pagination">
+          <button className="recipeList__pagination--button" onClick={backward}>
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </button>
+          <div>
+            {page} / {total}
+          </div>
+          <button className="recipeList__pagination--button" onClick={forward}>
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </button>
         </div>
-        <button className="recipeList__pagination--button" onClick={forward}>
-          <ion-icon name="arrow-forward-outline"></ion-icon>
-        </button>
-      </div>
+      ) : null}
     </div>
   );
 };

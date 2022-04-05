@@ -6,7 +6,6 @@ import React from "react";
 
 function App() {
   const [query, setQuery] = useState("");
-  console.log("App", query);
 
   return (
     <div className="App">
