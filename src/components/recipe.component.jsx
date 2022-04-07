@@ -1,31 +1,33 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import Spinner from "../img/refresh-outline.svg";
+import { API_URL } from "../utils/config";
+import { getJSON } from "../utils/helpers";
 
 const Recipe = (props) => {
   const [recipeData, setRecipeData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  let { id } = props;
+  const { id, setBookmarks, bookmarks } = props;
+  const [outline, setOutline] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
+    if (bookmarks.includes(id)) {
+      setOutline("bookmark");
+    } else {
+      setOutline("bookmark-outline");
+    }
+  }, [bookmarks, id]);
+
+  useEffect(() => {
+    let didCancel = false;
+    const loadRecipe = async (id) => {
+      if (didCancel) return;
       setIsLoading(true);
       setHasError(false);
 
       try {
-        if (id === undefined) {
-          throw new Error();
-        }
+        const data = await getJSON(`${API_URL}/${id}`);
 
-        const result = await fetch(
-          `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-        );
-
-        if (result.status !== 200) {
-          throw new Error();
-        }
-
-        const data = await result.json();
         let { recipe } = data.data;
 
         recipe = {
@@ -38,13 +40,19 @@ const Recipe = (props) => {
           sourceUrl: recipe.source_url,
           title: recipe.title,
         };
+
         setRecipeData(recipe);
       } catch (error) {
         setHasError(true);
       }
       setIsLoading(false);
     };
-    fetchData();
+
+    loadRecipe(id);
+
+    return () => {
+      didCancel = true;
+    };
   }, [id]);
 
   const recipeList = recipeData.ingredients
@@ -82,13 +90,26 @@ const Recipe = (props) => {
         })),
       }));
     }
-    console.log(recipeData);
   };
 
-  if (hasError) {
+  const bookmark = () => {
+    if (bookmarks.includes(id)) {
+      setBookmarks(bookmarks.filter((el) => el !== id));
+    } else {
+      setBookmarks([...bookmarks, id]);
+    }
+  };
+
+  if (hasError && !id && !isLoading) {
     return (
       <div className="recipe error">
         Start by Searching for a recipe or an ingredient. Have fun!
+      </div>
+    );
+  } else if (hasError && id && !isLoading) {
+    return (
+      <div className="recipe error">
+        We could not find that recipe. Please try another one!
       </div>
     );
   } else {
@@ -133,8 +154,8 @@ const Recipe = (props) => {
             <div className="recipe__circle">
               <ion-icon name="person-outline"></ion-icon>
             </div>
-            <div className="recipe__circle">
-              <ion-icon name="bookmark"></ion-icon>
+            <div className="recipe__circle" onClick={bookmark}>
+              <ion-icon name={outline}></ion-icon>
             </div>
           </div>
         </div>

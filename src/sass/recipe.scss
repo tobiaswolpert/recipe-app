@@ -90,11 +90,20 @@
   &__circle {
     background-color: $color-grey-light;
     display: flex;
+    cursor: pointer;
     justify-content: center;
     align-items: center;
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
+    background: linear-gradient(
+      135deg,
+      rgba($color-secondary-light, 1),
+      rgba($color-secondary-dark, 1)
+    );
+    & ion-icon {
+      color: white;
+    }
   }
 
   &__ingredients {

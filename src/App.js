@@ -6,11 +6,17 @@ import React from "react";
 
 function App() {
   const [query, setQuery] = useState("");
+  const [bookmarks, setBookmarks] = useState([]);
+  console.log("Bookmarks", bookmarks);
 
   return (
     <div className="App">
-      <Header setInput={setQuery} />
-      <Results input={query} />
+      <Header setQuery={setQuery} bookmarks={bookmarks} />
+      <Results
+        query={query}
+        setBookmarks={setBookmarks}
+        bookmarks={bookmarks}
+      />
     </div>
   );
 }

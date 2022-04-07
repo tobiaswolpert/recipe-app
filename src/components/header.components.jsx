@@ -2,11 +2,11 @@ import { useState } from "react";
 
 const Header = (props) => {
   const [search, setSearch] = useState("");
-  const { setInput } = props;
+  const { setQuery } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setInput(search);
+    setQuery(search);
   };
 
   const handleOnChange = (e) => {
