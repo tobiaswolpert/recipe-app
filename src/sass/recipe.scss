@@ -44,6 +44,10 @@
     color: $color-secondary-dark;
   }
 
+  ion-icon[name$="-circle-outline"] {
+    cursor: pointer;
+  }
+
   &__img {
     height: 40rem;
     background-size: cover;

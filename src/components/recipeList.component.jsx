@@ -56,13 +56,22 @@ const RecipeList = (props) => {
       {RecipeList.slice(range[0], range[1])}
       {RecipeList.length ? (
         <div className="recipeList__pagination">
-          <button className="recipeList__pagination--button" onClick={backward}>
+          <button
+            className="recipeList__pagination--button"
+            onClick={backward}
+            style={{ visibility: page === 1 ? "hidden" : "visible" }}
+          >
             <ion-icon name="arrow-back-outline"></ion-icon>
           </button>
+
           <div>
             {page} / {total}
           </div>
-          <button className="recipeList__pagination--button" onClick={forward}>
+          <button
+            className="recipeList__pagination--button"
+            onClick={forward}
+            style={{ visibility: page === total ? "hidden" : "visible" }}
+          >
             <ion-icon name="arrow-forward-outline"></ion-icon>
           </button>
         </div>

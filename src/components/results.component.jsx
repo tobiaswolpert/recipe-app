@@ -17,6 +17,10 @@ const Result = (props) => {
         const result = await fetch(
           `https://forkify-api.herokuapp.com/api/v2/recipes?search=${param}`
         );
+
+        if (result.status !== 200) {
+          throw new Error();
+        }
         const data = await result.json();
         const { recipes } = data.data;
         setRecipes(recipes);

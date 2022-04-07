@@ -13,9 +13,17 @@ const Recipe = (props) => {
       setHasError(false);
 
       try {
+        if (id === undefined) {
+          throw new Error();
+        }
+
         const result = await fetch(
           `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
         );
+
+        if (result.status !== 200) {
+          throw new Error();
+        }
 
         const data = await result.json();
         let { recipe } = data.data;
@@ -49,6 +57,33 @@ const Recipe = (props) => {
         </div>
       ))
     : null;
+
+  const changeServings = (e) => {
+    if (e.target.name.includes("remove") && recipeData.servings > 1) {
+      setRecipeData((prevData) => ({
+        ...prevData,
+        servings: prevData.servings - 1,
+        ingredients: prevData.ingredients.map((item) => ({
+          ...item,
+          quantity: item.quantity
+            ? (item.quantity / prevData.servings) * (prevData.servings - 1)
+            : null,
+        })),
+      }));
+    } else if (e.target.name.includes("add")) {
+      setRecipeData((prevData) => ({
+        ...prevData,
+        servings: prevData.servings + 1,
+        ingredients: prevData.ingredients.map((item) => ({
+          ...item,
+          quantity: item.quantity
+            ? (item.quantity / prevData.servings) * (prevData.servings + 1)
+            : null,
+        })),
+      }));
+    }
+    console.log(recipeData);
+  };
 
   if (hasError) {
     return (
@@ -84,8 +119,14 @@ const Recipe = (props) => {
             <div>
               <strong>{recipeData.servings}</strong> Servings
             </div>
-            <ion-icon name="remove-circle-outline"></ion-icon>
-            <ion-icon name="add-circle-outline"></ion-icon>
+            <ion-icon
+              name="remove-circle-outline"
+              onClick={(e) => changeServings(e)}
+            ></ion-icon>
+            <ion-icon
+              name="add-circle-outline"
+              onClick={(e) => changeServings(e)}
+            ></ion-icon>
           </div>
 
           <div className="recipe__detail--pair">
@@ -93,7 +134,7 @@ const Recipe = (props) => {
               <ion-icon name="person-outline"></ion-icon>
             </div>
             <div className="recipe__circle">
-              <ion-icon name="bookmark-outline"></ion-icon>
+              <ion-icon name="bookmark"></ion-icon>
             </div>
           </div>
         </div>
