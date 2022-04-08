@@ -1,5 +1,6 @@
 .header {
   flex: 0 0 10rem;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -114,5 +115,64 @@
     align-items: center;
     gap: 1rem;
     text-transform: uppercase;
+    cursor: pointer;
   }
+}
+
+.bookmark_list {
+  position: absolute;
+  max-height: 20rem;
+  max-width: 30rem;
+  overflow-y: scroll;
+  right: 0rem;
+  bottom: 0rem;
+  z-index: 100;
+  transform: translateY(99%);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 1rem 0rem;
+
+  &--item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 1rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: $color-grey-light;
+    }
+  }
+
+  &--details {
+    overflow-x: hidden;
+  }
+
+  &--title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+  }
+
+  &--img {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &--title {
+    color: $color-secondary-light;
+    font-size: 1.4rem;
+  }
+
+  &--publisher {
+    font-size: 1.2rem;
+  }
+}
+
+.invisible {
+  visibility: hidden;
 }
