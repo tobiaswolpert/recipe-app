@@ -16,6 +16,11 @@
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  cursor: pointer;
+
+  &__text {
+    color: #777777;
+  }
 
   &__container {
     height: 8rem;

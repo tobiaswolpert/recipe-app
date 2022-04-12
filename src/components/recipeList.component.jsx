@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RecipeList = (props) => {
   const [RecipeList, setRecipeList] = useState([]);
@@ -6,6 +7,7 @@ const RecipeList = (props) => {
   let [total, setTotal] = useState(1);
   let [range, setRange] = useState([0, 10]);
   let { setItem, recipes } = props;
+  let navigate = useNavigate();
 
   useEffect(() => {
     const RecipeList = recipes.length
@@ -14,7 +16,10 @@ const RecipeList = (props) => {
             <div
               className="recipeList__item"
               key={idx}
-              onClick={() => setItem(idx)}
+              onClick={() => {
+                setItem(idx);
+                navigate(`/${item.id}`);
+              }}
             >
               <img
                 className="recipeList__image"

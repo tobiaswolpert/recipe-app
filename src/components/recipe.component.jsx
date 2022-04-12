@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import Spinner from "../img/refresh-outline.svg";
 import { API_URL } from "../utils/config";
 import { getJSON } from "../utils/helpers";
+import { useParams } from "react-router-dom";
 
 const Recipe = (props) => {
   const [recipeData, setRecipeData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const { id, setBookmarks, bookmarks } = props;
+  const { setBookmarks, bookmarks } = props;
   const [outline, setOutline] = useState("");
+  let { id } = useParams();
 
   useEffect(() => {
     if (bookmarks.includes(id)) {
@@ -20,12 +22,14 @@ const Recipe = (props) => {
 
   useEffect(() => {
     let didCancel = false;
+
     const loadRecipe = async (id) => {
       if (didCancel) return;
       setIsLoading(true);
       setHasError(false);
 
       try {
+        if (!id) throw new Error();
         const data = await getJSON(`${API_URL}/${id}`);
 
         let { recipe } = data.data;

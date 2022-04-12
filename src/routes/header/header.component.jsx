@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getJSON } from "../utils/helpers";
-import { API_URL } from "../utils/config";
+import { getJSON } from "../../utils/helpers";
+import { API_URL } from "../../utils/config";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   const [search, setSearch] = useState("");
@@ -16,7 +17,7 @@ const Header = (props) => {
           bookmarks.map((item) => getJSON(`${API_URL}/${item}`))
         );
         const recipe = res.map((item) => item.data.recipe);
-        console.log(recipe);
+
         setBookmarkList(recipe);
       } catch (err) {
         console.log(err);
@@ -44,12 +45,12 @@ const Header = (props) => {
 
   return (
     <header className="header">
-      <div className="logo">
+      <Link className="logo" to="/">
         <div className="logo__container">
           <ion-icon name="fast-food-outline"></ion-icon>
         </div>
         <div className="logo__text">Food App</div>
-      </div>
+      </Link>
 
       <form className="search" onSubmit={handleSubmit}>
         <input
@@ -78,8 +79,8 @@ const Header = (props) => {
       </div>
 
       <div className={show ? "bookmark_list" : "bookmark_list invisible"}>
-        {bookmarkList.map((item) => (
-          <li className="bookmark_list--item">
+        {bookmarkList.map((item, idx) => (
+          <li className="bookmark_list--item" key={idx}>
             <img
               className="bookmark_list--img"
               src={item.image_url}

@@ -48,7 +48,7 @@ const Result = (props) => {
   return (
     <div className="container">
       <RecipeList recipes={recipes} setItem={setItem} />
-      <Recipe id={id} setBookmarks={setBookmarks} bookmarks={bookmarks} />
+      <Recipe setBookmarks={setBookmarks} bookmarks={bookmarks} />
     </div>
   );
 };
