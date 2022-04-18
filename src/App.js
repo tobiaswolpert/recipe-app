@@ -2,7 +2,7 @@ import "./sass/main.scss";
 import Home from "./routes/home/home.component";
 import { Routes, Route } from "react-router-dom";
 
-// Check
+// Check 2
 function App() {
   return (
     <Routes>
