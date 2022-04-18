@@ -73,7 +73,9 @@ const Header = (props) => {
         </div>
 
         <div className="control__bookmark" onClick={handleClick}>
-          <ion-icon name={show ? "bookmark" : "bookmark-outline"}></ion-icon>
+          <ion-icon name={show ? "bookmark" : "bookmark-outline"}>
+            test
+          </ion-icon>
           <div className="control__text">Bookmarks</div>
         </div>
       </div>

@@ -26,6 +26,11 @@ const Result = (props) => {
         const data = await getJSON(`${API_URL}?search=${param}`);
 
         const { recipes } = data.data;
+        console.log("recipes", recipes);
+        const recipeIngredients = await Promise.all(
+          recipes.map((item) => getJSON(`${API_URL}/${item.id}`))
+        );
+        console.log("RecipeIngredients", recipeIngredients);
         setRecipes(recipes);
       } catch (error) {
         setHasError(true);

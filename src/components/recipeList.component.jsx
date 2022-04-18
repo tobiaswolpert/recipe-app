@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../utils/config";
+import { getJSON } from "../utils/helpers";
 
 const RecipeList = (props) => {
   const [RecipeList, setRecipeList] = useState([]);
   let [page, setPage] = useState(1);
   let [total, setTotal] = useState(1);
   let [range, setRange] = useState([0, 10]);
+  let [ingredient, setIngredients] = useState();
   let { setItem, recipes } = props;
   let navigate = useNavigate();
 
   useEffect(() => {
+    console.log("recipes", recipes);
     const RecipeList = recipes.length
       ? recipes.map((item, idx) => {
           return (
@@ -40,7 +44,7 @@ const RecipeList = (props) => {
     RecipeList.length
       ? setTotal(Math.ceil(RecipeList.length / 10))
       : setTotal(1);
-  }, [recipes, setItem]);
+  }, [recipes, setItem, navigate]);
 
   const forward = () => {
     if (page < total) {
